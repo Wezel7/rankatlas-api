@@ -1,14 +1,9 @@
-import { createRequire } from 'module';
+// dotenv MUST be first import so env vars are set before any DB/route modules load
+import 'dotenv/config';
+
 import { existsSync } from 'fs';
 import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
-import dotenv from 'dotenv';
-
-const __dirname = dirname(fileURLToPath(import.meta.url));
-
-// Load .env from the same directory as app.js (works regardless of cwd)
-dotenv.config({ path: join(__dirname, '.env') });
-
 import express from 'express';
 import cors from 'cors';
 
@@ -18,6 +13,7 @@ import reviewRoutes  from './src/routes/reviews.js';
 import keywordRoutes from './src/routes/keywords.js';
 import metricRoutes  from './src/routes/metrics.js';
 
+const __dirname = dirname(fileURLToPath(import.meta.url));
 const app  = express();
 const PORT = process.env.PORT || 3001;
 
