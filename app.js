@@ -1,11 +1,16 @@
-import 'dotenv/config';
-import express from 'express';
-import cors from 'cors';
+import { createRequire } from 'module';
 import { existsSync } from 'fs';
 import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
+import dotenv from 'dotenv';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
+
+// Load .env from the same directory as app.js (works regardless of cwd)
+dotenv.config({ path: join(__dirname, '.env') });
+
+import express from 'express';
+import cors from 'cors';
 
 import authRoutes    from './src/routes/auth.js';
 import agentRoutes   from './src/routes/agents.js';
