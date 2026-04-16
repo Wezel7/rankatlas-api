@@ -41,7 +41,7 @@ app.get('/health', (_, res) => res.json({
 }));
 
 // Serve frontend static files in production
-const distPath = join(__dirname, '../rankatlas-app/dist');
+const distPath = join(__dirname, 'dist');
 if (existsSync(distPath)) {
   app.use(express.static(distPath));
   // SPA fallback
