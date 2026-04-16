@@ -36,7 +36,13 @@ app.use('/keywords', keywordRoutes);
 app.use('/metrics',  metricRoutes);
 
 // Health check
-app.get('/health', (_, res) => res.json({ status: 'ok', ts: new Date().toISOString() }));
+app.get('/health', (_, res) => res.json({
+  status: 'ok',
+  ts: new Date().toISOString(),
+  dir: __dirname,
+  env_loaded: !!process.env.DB_USER,
+  db_user: process.env.DB_USER ? process.env.DB_USER.substring(0,3) + '***' : 'MISSING',
+}));
 
 // Serve frontend static files in production
 const distPath = join(__dirname, '../rankatlas-app/dist');
